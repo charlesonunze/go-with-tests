@@ -26,4 +26,15 @@ func Test(t *testing.T) {
 			t.Errorf("want %d but got %d given %v and %v", want, got, input1, input2)
 		}
 	})
+
+	t.Run("sum all tails", func(t *testing.T) {
+		input1 := []int{1, 2, 3}
+		input2 := []int{3, 4, 5}
+		got := SumAllTails(input1, input2)
+		want := []int{5, 9}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("want %d but got %d given %v and %v", want, got, input1, input2)
+		}
+	})
 }
