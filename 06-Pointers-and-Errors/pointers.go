@@ -12,12 +12,20 @@ type Wallet struct {
 
 // Deposit function
 func (w *Wallet) Deposit(amount Bitcoin) {
-	fmt.Printf("address of balance in Deposit is %v \n", &w.balance)
 	w.balance += amount
+}
+
+// Withdraw function
+func (w *Wallet) Withdraw(amount Bitcoin) {
+	w.balance -= amount
 }
 
 // Balance function
 func (w *Wallet) Balance() Bitcoin {
-	fmt.Printf("address of balance in Deposit is %v \n", &w.balance)
 	return w.balance
+}
+
+//
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
 }

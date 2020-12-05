@@ -1,21 +1,32 @@
 package pointers
 
 import (
-	"fmt"
 	"testing"
 )
 
 func TestWallet(t *testing.T) {
-	wallet := Wallet{}
+	assertBalance := func(t *testing.T, wallet Wallet, want Bitcoin) {
+		t.Helper()
+		got := wallet.Balance()
 
-	wallet.Deposit(Bitcoin(10))
-
-	got := wallet.Balance()
-	want := Bitcoin(10)
-
-	fmt.Printf("address of balance in test is %v \n", &wallet.balance)
-
-	if got != want {
-		t.Errorf("want %d but got %d", want, got)
+		if got != want {
+			t.Errorf("got %s want %s", got, want)
+		}
 	}
+
+	t.Run("Deposit", func(t *testing.T) {
+		wallet := Wallet{}
+		wallet.Deposit(Bitcoin(10))
+		want := Bitcoin(10)
+
+		assertBalance(t, wallet, want)
+	})
+
+	t.Run("Withdraw", func(t *testing.T) {
+		wallet := Wallet{balance: Bitcoin(10)}
+		wallet.Withdraw(Bitcoin(5))
+		want := Bitcoin(5)
+
+		assertBalance(t, wallet, want)
+	})
 }
