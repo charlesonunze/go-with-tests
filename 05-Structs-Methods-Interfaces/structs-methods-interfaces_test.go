@@ -3,24 +3,24 @@ package interfaces
 import "testing"
 
 func Test(t *testing.T) {
-	rectangle := Rectangle{2.0, 3.0}
-	circle := Circle{2.0}
+	checkArea := func(t *testing.T, s Shape, want float64) {
+		t.Helper()
+		got := s.Area()
+
+		if got != want {
+			t.Errorf("got %g want %g", got, want)
+		}
+	}
 
 	t.Run("calculate area of a rectangle", func(t *testing.T) {
-		got := rectangle.Area()
+		rectangle := Rectangle{2.0, 3.0}
 		want := 6.0
-
-		if want != got {
-			t.Errorf("want %.2f but got %.2f", want, got)
-		}
+		checkArea(t, rectangle, want)
 	})
 
 	t.Run("calculate area of a circle", func(t *testing.T) {
-		got := circle.Area()
+		circle := Circle{2.0}
 		want := 12.566370614359172
-
-		if want != got {
-			t.Errorf("want %f but got %f", want, got)
-		}
+		checkArea(t, circle, want)
 	})
 }
