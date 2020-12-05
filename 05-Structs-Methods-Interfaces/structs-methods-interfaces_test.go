@@ -7,6 +7,8 @@ func Test(t *testing.T) {
 		shape Shape
 		want  float64
 	}{
+		{Square{2.0, 2.0}, 4.0},
+		{Triangle{4.0, 5.0}, 10.0},
 		{Rectangle{2.0, 3.0}, 6.0},
 		{Circle{2.0}, 12.566370614359172},
 	}
